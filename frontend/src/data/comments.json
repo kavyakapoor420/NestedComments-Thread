@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "content": "This is the first comment",
+    "votes": 5,
+    "timestamp": "2024-06-16T10:00:00Z",
+    "replies": [
+      {
+        "id": 2,
+        "content": "This is the first reply for the first comment",
+        "votes": 3,
+        "timestamp": "2024-06-16T11:00:00Z",
+        "replies": []
+      },
+      {
+        "id": 3,
+        "content": "This is the second reply for the first comment",
+        "votes": 4,
+        "timestamp": "2024-06-16T11:05:00Z",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "content": "This is the second top-level comment",
+    "votes": 2,
+    "timestamp": "2024-06-16T12:00:00Z",
+    "replies": [
+      {
+        "id": 5,
+        "content": "Reply to the second comment",
+        "votes": 1,
+        "timestamp": "2024-06-16T12:30:00Z",
+        "replies": [
+          {
+            "id": 6,
+            "content": "Nested reply to reply",
+            "votes": 0,
+            "timestamp": "2024-06-16T12:45:00Z",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "content": "Another top-level comment with no replies",
+    "votes": 0,
+    "timestamp": "2024-06-16T13:00:00Z",
+    "replies": []
+  },
+  {
+    "id": 8,
+    "content": "Yet another comment",
+    "votes": 7,
+    "timestamp": "2024-06-16T14:00:00Z",
+    "replies": [
+      {
+        "id": 9,
+        "content": "Reply to yet another comment",
+        "votes": 2,
+        "timestamp": "2024-06-16T14:10:00Z",
+        "replies": []
+      }
+    ]
+  }
+]
