@@ -16,7 +16,7 @@ export const authenticateToken=(req:Request,res:Response,next:NextFunction):void
             console.error("jwt verification error",err)
             res.status(403).json({message:'invalid or expired token'})
          }
-         req.user=user as { id:number ;username:string}
+         req.user=user as { id:number ;username:string,email:string}
          next() 
        })
 }
