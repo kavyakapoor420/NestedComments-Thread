@@ -1,6 +1,6 @@
 import {Request,Response} from 'express'
-import {pool} from '../db/dbIntiliaze'
-import { GRACE_PERIOD_MINUTES } from '../config'
+import {pool} from '../db/dbIntiliaze.ts'
+import { GRACE_PERIOD_MINUTES } from '../config/index.ts'
 import { QueryResult } from 'pg'
 
 
@@ -8,6 +8,7 @@ import { QueryResult } from 'pg'
 
 export const createComment=async(req:Request,res:Response)=>{
     const {content,parent_id}=req.body ;
+    
     const userId=req.user?.id ;
 
     if(!userId){

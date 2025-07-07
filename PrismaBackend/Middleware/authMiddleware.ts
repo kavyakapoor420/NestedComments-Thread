@@ -1,6 +1,10 @@
-import {Request,Response,NextFunction} from 'express'
+
+import express from 'express';
+import { Request, Response, NextFunction } from  'express';
+
+
 import jwt from 'jsonwebtoken'
-import {JWT_SECRET}  from '../config/index'
+import {JWT_SECRET}  from '../config/index.ts'
 
 export const authenticateToken=(req:Request,res:Response,next:NextFunction):void=>{
        const authHeader=req.headers['authorization']

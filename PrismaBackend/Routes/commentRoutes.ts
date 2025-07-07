@@ -1,7 +1,7 @@
 import express,{Router} from 'express'
-import { authenticateToken } from '../Middleware/authMiddleware'
-import { createComment, deleteComment, getAllComments, restoreDeletedComment, updateComment } from '../Controllers/commentController'
-import { asyncHandler } from '../HelperFunctions/asyncHandler';
+import { authenticateToken } from '../Middleware/authMiddleware.ts'
+import { createComment, deleteComment, getAllComments, restoreDeletedComment, updateComment } from '../Controllers/commentController.ts'
+import { asyncHandler } from '../HelperFunctions/asyncHandler.ts';
 
 const commentRouter=Router() 
 

@@ -1,6 +1,6 @@
 import express,{Router} from 'express'
-import { authenticateToken } from '../Middleware/authMiddleware'
-import { getNotifications, markNotificationAsRead } from '../Controllers/notificationController'
+import { authenticateToken } from '../Middleware/authMiddleware.ts'
+import { getNotifications, markNotificationAsRead } from '../Controllers/notificationController.ts'
 
 const notificationRouter=Router() 
 

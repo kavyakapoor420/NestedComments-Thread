@@ -1,8 +1,8 @@
 import {Request,Response} from 'express'
-import {pool} from '../db/dbIntiliaze'
+import {pool} from '../db/dbIntiliaze.ts'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {JWT_SECRET} from '../config/index'
+import {JWT_SECRET} from '../config/index.ts'
 import { QueryResult } from 'pg'
 
 

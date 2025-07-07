@@ -1,30 +1,29 @@
-import express from 'express'
-import cors from 'cors'
-import { PORT,FRONTEND_URL } from './config'
-import { initilizeDatabase } from './db/dbIntiliaze'
+const express = require('express');
+const cors = require('cors');
 
+const { PORT, FRONTEND_URL } = require('./config/index.ts');
+const { initilizeDatabase } = require('./db/dbIntiliaze.ts');
 
-import userRouter from './Routes/userRoutes'
-import commentRouter from './Routes/commentRoutes'
-import notificationRouter from './Routes/notificationRoutes'
+const userRouter = require('./Routes/userRoutes.ts');
+const commentRouter = require('./Routes/commentRoutes.ts');
+const notificationRouter = require('./Routes/notificationRoutes.ts');
 
-const app=express() 
+const app = express();
 
 app.use(cors({
-    origin:FRONTEND_URL
-}))
-app.use(express.json())
+    origin: FRONTEND_URL,
+}));
 
+app.use(express.json());
 
-app.use('/users',userRouter)
-app.use('/comments',commentRouter)
-app.use('/notfications',notificationRouter)
+app.use('/users', userRouter);
+app.use('/comments', commentRouter);
+app.use('/notfications', notificationRouter);
 
-
-initilizeDatabase().then(()=>{
-    app.listen(PORT,()=>{
-        console.log(`connected to databas and server is listening on port ${PORT}`)
-    })
-}).catch((err)=>{
-    console.error('failed to initilaize DB and SERVER',err)
-})
+initilizeDatabase().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Connected to database and server is listening on port ${PORT}`);
+    });
+}).catch((err:any) => {
+    console.error('Failed to initialize DB and SERVER:', err);
+});

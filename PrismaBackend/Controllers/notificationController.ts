@@ -1,4 +1,4 @@
-import {pool} from '../db/dbIntiliaze'
+import {pool} from '../db/dbIntiliaze.ts'
 import { QueryResult } from 'pg'
 import {Request,Response} from 'express'
 

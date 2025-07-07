@@ -1,5 +1,5 @@
 import {Pool} from 'pg'
-import {DATABASE_URL} from  '../config/index'
+import {DATABASE_URL} from  '../config/index.ts'
 
 
 export const pool=new Pool({

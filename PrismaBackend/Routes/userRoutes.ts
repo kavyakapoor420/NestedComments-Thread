@@ -1,8 +1,8 @@
-import express,{Router} from 'express'
-import { authenticateToken } from '../Middleware/authMiddleware'
-import { getMe } from '../Controllers/userController'
+import express from 'express';
+import { authenticateToken } from '../Middleware/authMiddleware.ts';
+import { getMe } from '../Controllers/userController.ts';
 
-const userRouter=Router()
+const userRouter = express.Router();
 
 userRouter.get('/me',authenticateToken,getMe)
 
