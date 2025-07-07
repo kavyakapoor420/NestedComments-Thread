@@ -127,3 +127,83 @@ export const updateComment=async(req:Request,res:Response)=>{
         res.status(500).json({message:'internal server error restoring comment '})
     }
 }
+
+//delete a comment -: /comments/:id 
+export const deleteComment=async(req:Request,res:Response)=>{
+    const commentId=req.params.id ;
+    const userId=req.user?.id ;
+
+    if(!userId){
+        res.status(401).json({message:'user not authenticated'})
+        return 
+    }
+
+    try{
+         const result:QueryResult=await pool.query(
+            'SELECT user_id,is_deleted FROM comments WHERE id=$1',
+            [commentId]
+         )
+         const comment=result.rows[0]
+
+         if(!comment){
+            return res.status(404).json({message:'comment not found'})
+         }
+         if(comment.user_id!==userId){
+            return res.json(403).json({message:'you are not authroized to delete this comment'})
+         }
+         if(comment.is_deleted){
+            return res.status(400).json({message:"comment is aready deleted"})
+         }
+
+         await pool.query(
+            `UPDATE comments SET is_deleted =TRUE ,deleted_at=CURRENT_TIMESTAMP where id=$1`,
+             [commentId]
+         )
+         res.status(400).json({message:'comment  deleted successfully'})
+    }catch(err){
+         console.error('erro deleting comment',err)
+         res.status(500).json({message:'internal server error while deleting comment'})
+    }
+}
+
+export const restoreDeletedComment=async(req:Request,res:Response)=>{
+    const commentId=req.params.id ;
+    const userId=req.user?.id ;
+
+    if(!userId){
+        return res.json(401).json({message:"user not authenticated"})
+    }
+    try{
+         const result:QueryResult=await pool.query(
+            `SELECT user_id ,deleted_at,is_deleted FROM comments WHERE id=$1`,
+            [commentId]
+         )
+         const comment=result.rows[0];
+
+         if(!comment){
+            return res.status(404).json({message:'comment not found'})
+         }
+         if(!comment.is_deleted){
+            return res.status(400).json({message:"comment is not deleted"})
+         }
+
+
+         const deletedAt=new Date(comment.deleted_at)
+         const now=new Date() 
+         const timeElapsed=(now.getTime()-deletedAt.getTime())/(1000*60)
+      
+
+         if(timeElapsed>GRACE_PERIOD_MINUTES){
+            return res.status(403).json({message:`comments can only be restored within ${GRACE_PERIOD_MINUTES} minutes `})
+         }
+
+         await pool.query(
+            `UPDATE commenst SET is_deleted=FALSE,deleted_at=NULL WHERE id=$1 `,
+             [commentId]
+         )
+         res.status(200).json({message:'commnet restored successfully'})
+    }catch(err){
+         console.error('error restoring comment',err)
+         res.status(500).json({message:'internal server error restoring in comment'})
+    }
+}
