@@ -1,9 +1,4 @@
-/**
- * @file server.ts
- * @description Backend for a comment application with user authentication, comment management, and notifications.
- * @author Your Name
- * @version 1.0.0
- */
+
 
 import express, { Request, Response, NextFunction } from 'express';
 import { Pool, QueryResult } from 'pg';
