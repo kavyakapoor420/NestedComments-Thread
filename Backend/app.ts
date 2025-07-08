@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const  axios =require('axios');
+
 
 const { PORT, FRONTEND_URL } = require('./config/index.ts');
 const { initilizeDatabase } = require('./db/dbIntiliaze.ts');
@@ -21,6 +23,12 @@ app.use('/users', userRouter);
 app.use('/auth',authRouter)
 app.use('/comments', commentRouter);
 app.use('/notfications', notificationRouter);
+
+setInterval(() => {
+  axios.get('https://deploy-project-2-hgpy.onrender.com/')
+    .then(() => console.log('Self-ping to keep Render awake'))
+    .catch((err) => console.error('Self-ping failed', err));
+}, 5 * 60 * 1000); // every 5 minutes
 
 initilizeDatabase().then(() => {
     app.listen(PORT, () => {
