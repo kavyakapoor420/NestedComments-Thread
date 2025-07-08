@@ -7,6 +7,7 @@ const { initilizeDatabase } = require('./db/dbIntiliaze.ts');
 const userRouter = require('./Routes/userRoutes.ts');
 const commentRouter = require('./Routes/commentRoutes.ts');
 const notificationRouter = require('./Routes/notificationRoutes.ts');
+const authRouter=require('./Routes/authRoutes.ts')
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/users', userRouter);
+app.use('/auth',authRouter)
 app.use('/comments', commentRouter);
 app.use('/notfications', notificationRouter);
 
