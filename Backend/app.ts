@@ -1,15 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const  axios =require('axios');
+import express from 'express'
+import cors from 'cors';
+import axios from 'axios';
 
+import { PORT, FRONTEND_URL } from './config/index.ts';
+import { initilizeDatabase } from './db/dbIntiliaze.ts';
 
-const { PORT, FRONTEND_URL } = require('./config/index.ts');
-const { initilizeDatabase } = require('./db/dbIntiliaze.ts');
+import userRouter from './Routes/userRoutes.ts';
+import commentRouter from './Routes/commentRoutes.ts';
+import notificationRouter from './Routes/notificationRoutes.ts';
+import authRouter from './Routes/authRoutes.ts';
 
-const userRouter = require('./Routes/userRoutes.ts');
-const commentRouter = require('./Routes/commentRoutes.ts');
-const notificationRouter = require('./Routes/notificationRoutes.ts');
-const authRouter=require('./Routes/authRoutes.ts')
 
 const app = express();
 
